@@ -61,29 +61,28 @@
 <!-- Popup -->
 <div id="popupOverlay">
   <div id="popupBox">
-    <h1>Info</h1> 
+    <h1>Info</h1>
     <h3>Scroll to see photos.</h3>
-    <h3>Logos/photos are buttons.</h3>    
-    <h3>This Website is optimised for PC.</h3> 
-    <h3>Click on the device you use.</h3> 
-    <button onclick="closePopup()">Phone</button>
-    <script>
-  function closePopup() {
-    document.getElementById("popupOverlay").style.display = "none";
-    window.location.href = "BVM.html";  // ← Hier stuur je hem naartoe
-  }
-</script>
-   
+    <h3>Logos/photos are buttons.</h3>
+    <h3>This Website is optimised for PC.</h3>
+    <h3>Click on the device you use.</h3>
     
-    <button onclick="closePopup()">PC</button>
-
+    <button onclick="closePopup('phone')">Phone</button>
+    <button onclick="closePopup('pc')">PC</button>
+  </div>
+</div>
 
 <script>
-  function closePopup() {
+  function closePopup(device) {
     document.getElementById("popupOverlay").style.display = "none";
-    <a href = "https://brebendc.github.io/BVM/BVM.html";  // ← Hier stuur je hem naartoe
+    
+    if (device === 'phone') {
+      window.location.href = "BVM.html";  // relative, or use full path if needed
+    } else if (device === 'pc') {
+      window.location.href = "https://brebendc.github.io/BVM/BVM.html";  // or change to a different PC-optimized page if that's the intent
+    }
   }
-</a>
+</script>
 </script>
 </div>   
 </div>
