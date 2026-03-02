@@ -57,24 +57,32 @@
 
 <body>
 
+
 <!-- Popup -->
 <div id="popupOverlay">
   <div id="popupBox">
-    <h1>Info</h1>
-    <h3>This Website is optimised for PC.</h3> 
-    <h3>Have the phone horizontaly.</h3>
+    <h1>Info</h1> 
     <h3>Scroll to see photos.</h3>
-    <h3>Logos/photos are buttons.</h3>
+    <h3>Logos/photos are buttons.</h3>    
+    <h3>This Website is optimised for PC.</h3> 
+    <h3>Click on the device you use.</h3> 
+    <button onclick="closePopup()">Phone</button>
+    <script>
+  function closePopup() {
+    document.getElementById("popupOverlay").style.display = "none";
+    window.location.href = "https://brebendc.github.io/BVM-GSM/BVM.html";  // ← Hier stuur je hem naartoe
+  }
+</script>
     
     
-    <button onclick="closePopup()">Continue</button>
+    <button onclick="closePopup()">PC</button>
   </div>
 </div>
 
 <script>
   function closePopup() {
     document.getElementById("popupOverlay").style.display = "none";
-    window.location.href = "BVM.html";  // ← Hier stuur je hem naartoe
+    window.location.href = "https://brebendc.github.io/BVM/Popup.html";  // ← Hier stuur je hem naartoe
   }
 </script>
 
