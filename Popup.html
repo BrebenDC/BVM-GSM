@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BVM</title>
+
+<style>
+  body {
+    margin: 0;
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Achtergrond overlay */
+  #popupOverlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  /* Popup venster */
+  #popupBox {
+    background: #111;
+    border: 1px solid #444;
+    padding: 25px;
+    width: 80%;
+    max-width: 350px;
+    text-align: center;
+    border-radius: 12px;
+  }
+
+  #popupBox button {
+    margin-top: 18px;
+    padding: 12px 20px;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  #popupBox button:hover {
+    background: #ccc;
+  }
+</style>
+
+</head>
+
+<body>
+
+<!-- Popup -->
+<div id="popupOverlay">
+  <div id="popupBox">
+    <h1>Info</h1>
+    <h3>This Website is optimised for PC.</h3> 
+    <h3>Have the phone horizontaly.</h3>
+    <h3>Scroll to see photos.</h3>
+    <h3>Logos/photos are buttons.</h3>
+    
+    
+    <button onclick="closePopup()">Continue</button>
+  </div>
+</div>
+
+<script>
+  function closePopup() {
+    document.getElementById("popupOverlay").style.display = "none";
+    window.location.href = "BVM.html";  // ← Hier stuur je hem naartoe
+  }
+</script>
+
+</body>
+</html>
