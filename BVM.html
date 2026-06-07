@@ -1,102 +1,606 @@
-<link rel="icon" type="Fotos/foto.png" href="Fotos/logo.png">
-<html>
-  <body style ="background-color:black;color:white"></body>
-<title>BVM</title>
-
-
-
-
-<body>
-  <a href="support.html">
-    <img src="Fotos/logo.png" alt="BAM logo" class="logo">
-  </a>
+<!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <style>
-    body {
-      margin: 0;
-      background: black;
-    }
-    .logo {
-      position: fixed;
-      top: 10;
-      left: 10;
-      height: 60;
-    }
-  </style>
-</head>
-
-  <a href="support.html">
-<video autoplay muted loop playsinline style="
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -1;
-">
-  <source src="Fotos/" type="/mp4">
-</video>
-  </a>
-
-
-
-
-
-<body style ="background-color:black;color:white">
-</body>
-
-<a href="meerinfo.html">
-
-<html lang="en">
-<head>
 <meta charset="UTF-8">
-<meta name="viewport" content ="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BVM — Belgische Voertuig Motoriek</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #000;
+    --white: #fff;
+    --gray: #888;
+    --dim: #1a1a1a;
+    --line: #222;
+    --accent: #F0C132;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 430px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(0,0,0,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 0.5px solid var(--line);
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 52px;
+  }
+  nav .brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 4px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  nav .nav-links {
+    display: flex;
+    gap: 20px;
+  }
+  nav .nav-links a {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  nav .nav-links a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px 40px;
+    position: relative;
+    border-bottom: 0.5px solid var(--line);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 50% 60%, #1a1200 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 0.5px solid var(--accent);
+    border-radius: 20px;
+    padding: 5px 16px;
+    margin-bottom: 28px;
+    display: inline-block;
+  }
+  .logo-emblem {
+    width: 110px;
+    height: 110px;
+    border: 1.5px solid var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+    position: relative;
+  }
+  .logo-emblem::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 0.5px solid var(--line);
+    border-radius: 50%;
+  }
+  .logo-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 4px;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 6px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .hero .sub {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 32px;
+  }
+  .hero .tagline {
+    font-size: 16px;
+    color: #bbb;
+    max-width: 260px;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+  .scroll-hint {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #444;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .scroll-hint::after {
+    content: '';
+    width: 0.5px;
+    height: 40px;
+    background: #333;
+    display: block;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 52px 24px;
+    border-bottom: 0.5px solid var(--line);
+  }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--line);
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+    line-height: 1;
+  }
+  .section-body {
+    color: #999;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  /* MERCH / SHOP */
+  .merch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 4px;
+  }
+  .merch-card {
+    background: var(--dim);
+    border: 0.5px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 16px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--white);
+    display: block;
+    transition: border-color 0.2s, transform 0.15s;
+    cursor: pointer;
+  }
+  .merch-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .merch-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .merch-name {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .merch-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 2px;
+    color: var(--accent);
+  }
+  .merch-sub {
+    font-size: 10px;
+    color: #555;
+    margin-top: 4px;
+  }
+  .merch-note {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: var(--dim);
+    border: 0.5px solid var(--line);
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--gray);
+    text-align: center;
+    line-height: 1.6;
+  }
+  .merch-note a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* TIMELINE */
+  .timeline { margin-top: 4px; }
+  .tl-item {
+    display: flex;
+    gap: 0;
+    padding: 16px 0;
+    border-bottom: 0.5px solid var(--line);
+    align-items: center;
+  }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    min-width: 72px;
+  }
+  .tl-year.active { color: var(--accent); }
+  .tl-sep {
+    width: 0.5px;
+    height: 40px;
+    background: var(--line);
+    margin-right: 20px;
+    flex-shrink: 0;
+  }
+  .tl-event { font-size: 14px; color: #ccc; }
+  .tl-status {
+    margin-left: auto;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    flex-shrink: 0;
+  }
+  .tl-status.live {
+    background: rgba(240,193,50,0.15);
+    color: var(--accent);
+    border: 0.5px solid rgba(240,193,50,0.4);
+  }
+  .tl-status.soon {
+    background: rgba(255,255,255,0.05);
+    color: #555;
+    border: 0.5px solid #333;
+  }
+
+  /* WHY */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .why-card {
+    background: var(--dim);
+    border: 0.5px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .why-flag { font-size: 22px; }
+  .why-label { font-size: 12px; color: #bbb; }
+  .why-country { font-size: 11px; color: #555; margin-top: 2px; }
+  .why-bel {
+    border-color: rgba(240,193,50,0.3);
+    background: rgba(240,193,50,0.05);
+    grid-column: 1 / -1;
+  }
+  .why-bel .why-label { color: var(--accent); font-size: 14px; }
+
+  /* COIN */
+  .coin-hero {
+    background: var(--dim);
+    border: 0.5px solid var(--line);
+    border-radius: 18px;
+    padding: 28px 20px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .coin-sym {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .coin-desc { font-size: 13px; color: #666; margin-bottom: 20px; }
+  .launch-pill {
+    display: inline-block;
+    background: rgba(240,193,50,0.1);
+    border: 0.5px solid rgba(240,193,50,0.3);
+    border-radius: 20px;
+    padding: 5px 18px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  /* BUTTONS */
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.2s, transform 0.15s;
+    margin-bottom: 10px;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-primary { background: var(--white); color: var(--black); font-weight: 500; }
+  .btn-accent { background: var(--accent); color: var(--black); font-weight: 500; }
+  .btn-outline { background: transparent; color: var(--white); border: 0.5px solid #444; }
+
+  /* NEEDED */
+  .needed-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .need-pill {
+    border: 0.5px solid var(--line);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: #888;
+    background: var(--dim);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 36px 24px 48px;
+    text-align: center;
+  }
+  .footer-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .social-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .social-btn {
+    border: 0.5px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    background: var(--dim);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .social-btn:hover { border-color: var(--white); color: var(--white); }
+  .footer-copy {
+    font-size: 11px;
+    color: #444;
+    letter-spacing: 1px;
+  }
+
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
 </head>
-
 <body>
-<div style="background-image: url('Fotos/server.png'); 
-background-size: contain; 
-background-repeat: no-repeat; 
-background-position: center; 
-width: 100vw; 
-height: 100vh;">
-</div>
-</a>
-</body>
 
+<nav>
+  <a href="#" class="brand">BVM</a>
+  <div class="nav-links">
+    <a href="#merch">Shop</a>
+    <a href="#timeline">Tijdlijn</a>
+    <a href="#coin">Coin</a>
+  </div>
+</nav>
 
+<section class="hero">
+  <div class="hero-badge">Belgische Voertuig Motoriek</div>
+  <div class="logo-emblem">
+    <span class="logo-text">F/M</span>
+  </div>
+  <h1>BVM</h1>
+  <p class="sub">Car Factory Belgium · Est. 2029</p>
+  <p class="tagline">The start of an era begins here. The first Belgian car brand of its kind.</p>
+  <a href="#merch" class="btn btn-accent" style="width:auto;padding:13px 36px;">Shop nu</a>
+  <div class="scroll-hint">Scroll</div>
+</section>
 
-	
-<a href="webshop.html">
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content ="width=device-width, initial-scale=1.0">
-</head>
+<section id="merch" class="fade-in">
+  <div class="section-label">Webshop</div>
+  <div class="section-title">Merch</div>
+  <div class="merch-grid">
+    <a href="https://brebendc.github.io/BVM/webshop_tshirt.html" class="merch-card" target="_blank">
+      <span class="merch-icon">👕</span>
+      <div class="merch-name">T-shirt</div>
+      <div class="merch-price">€20</div>
+      <div class="merch-sub">BVM Official</div>
+    </a>
+    <a href="https://brebendc.github.io/BVM/sleutelhangers.html" class="merch-card" target="_blank">
+      <span class="merch-icon">🔑</span>
+      <div class="merch-name">Sleutelhanger</div>
+      <div class="merch-price">€15</div>
+      <div class="merch-sub">Keychain</div>
+    </a>
+  </div>
+  <div class="merch-note">
+    Bestellen via <a href="mailto:websitesbreben@gmail.com">websitesbreben@gmail.com</a><br>
+    Vermeld product + adres in je mail.
+  </div>
+</section>
 
-<body>
-<div style="background-image: url('Fotos/webshop.png'); 
-background-size: contain; 
-background-repeat: no-repeat; 
-background-position: center; 
-width: 100vw; 
-height: 100vh;">
-</div>
-</a>
-</body>
+<section id="who" class="fade-in">
+  <div class="section-label">Wie zijn wij</div>
+  <div class="section-title">Car Factory Belgium</div>
+  <p class="section-body">BVM bouwt het eerste Belgische automerk van zijn soort. Een visie die vandaag begint en doorrijdt naar 2029.</p>
+  <div style="margin-top:24px;">
+    <div class="section-label" style="margin-bottom:16px;">Wat we nodig hebben</div>
+    <div class="needed-list">
+      <span class="need-pill">Investeerders</span>
+      <span class="need-pill">Software</span>
+      <span class="need-pill">Kwaliteitsonderdelen</span>
+      <span class="need-pill">Model</span>
+      <span class="need-pill">Erkend programma</span>
+    </div>
+  </div>
+</section>
 
-<h1> 
+<section id="timeline" class="fade-in">
+  <div class="section-label">Tijdlijn</div>
+  <div class="section-title">De weg naar 2029</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <span class="tl-year active">2026</span>
+      <div class="tl-sep"></div>
+      <span class="tl-event">Merk lancering</span>
+      <span class="tl-status live">Live</span>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">2027</span>
+      <div class="tl-sep"></div>
+      <span class="tl-event">$BVM coin</span>
+      <span class="tl-status soon">Binnenkort</span>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">2028</span>
+      <div class="tl-sep"></div>
+      <span class="tl-event">Eerste prototype</span>
+      <span class="tl-status soon">Binnenkort</span>
+    </div>
+    <div class="tl-item">
+      <span class="tl-year">2029</span>
+      <div class="tl-sep"></div>
+      <span class="tl-event">Productie begint</span>
+      <span class="tl-status soon">Binnenkort</span>
+    </div>
+  </div>
+</section>
 
-</h1>
+<section id="why" class="fade-in">
+  <div class="section-label">Waarom?</div>
+  <div class="section-title">Waarom niet België?</div>
+  <div class="why-grid">
+    <div class="why-card">
+      <span class="why-flag">🇺🇸</span>
+      <div>
+        <div class="why-label">USA heeft het</div>
+        <div class="why-country">Ford · Tesla · GM</div>
+      </div>
+    </div>
+    <div class="why-card">
+      <span class="why-flag">🇩🇪</span>
+      <div>
+        <div class="why-label">Duitsland heeft het</div>
+        <div class="why-country">BMW · Mercedes · VW</div>
+      </div>
+    </div>
+    <div class="why-card">
+      <span class="why-flag">🇫🇷</span>
+      <div>
+        <div class="why-label">Frankrijk heeft het</div>
+        <div class="why-country">Peugeot · Renault</div>
+      </div>
+    </div>
+    <div class="why-card why-bel">
+      <span class="why-flag">🇧🇪</span>
+      <div>
+        <div class="why-label">België verdient het ook</div>
+        <div class="why-country">BVM · Coming 2029</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="coin" class="fade-in">
+  <div class="section-label">Crypto</div>
+  <div class="section-title">$BVM Coin</div>
+  <div class="coin-hero">
+    <span class="coin-sym">$BVM</span>
+    <p class="coin-desc">Voor de fabriek. Voor de auto.<br>Er is de community.</p>
+    <span class="launch-pill">Lancering 2027</span>
+  </div>
+  <a href="https://www.gofundme.com/f/new-belgian-car-brand" class="btn btn-accent" target="_blank">Steun via GoFundMe</a>
+  <a href="https://brebendc.github.io/BVM/support.html" class="btn btn-outline" target="_blank">Meer over $BVM</a>
+</section>
+
 <footer>
-<center> <a href ="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJvqsKgwlpKtgQhxtMwlzrqFMDClwJSLMqTfkFwcWzzXLcGgsFnCsNvbqBctSHrPBbSSsVq"
-target ="blank"><b>Email</b> </a> </p>
-Copyright &copy; Breben DC 6/09/2025 </h1> >
-</center>
+  <span class="footer-brand">BVM</span>
+  <div class="social-row">
+    <a href="https://www.tiktok.com/@BVM-Official" class="social-btn" target="_blank">TikTok</a>
+    <a href="https://www.youtube.com/@B-DC" class="social-btn" target="_blank">YouTube</a>
+    <a href="https://www.gofundme.com/f/new-belgian-car-brand" class="social-btn" target="_blank">GoFundMe</a>
+    <a href="mailto:websitesbreben@gmail.com" class="social-btn">Email</a>
+  </div>
+  <div class="footer-copy">© Breben DC 2026</div>
 </footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
 </html>
-
-
-
