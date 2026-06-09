@@ -7,13 +7,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Space+Mono&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
       --black: #000000;
       --white: #ffffff;
       --dim: #888888;
     }
-
     html, body {
       width: 100%; height: 100%;
       background: var(--black);
@@ -22,7 +20,6 @@
       overflow: hidden;
       cursor: none;
     }
-
     /* Custom cursor */
     .cursor {
       position: fixed;
@@ -36,7 +33,7 @@
     }
     .cursor.grow { width: 30px; height: 30px; background: transparent; border: 1px solid white; }
 
-    /* Noise texture overlay */
+    /* Noise + Scanline */
     body::before {
       content: '';
       position: fixed; inset: 0;
@@ -45,18 +42,10 @@
       z-index: 1000;
       opacity: 0.4;
     }
-
-    /* Scan line effect */
     body::after {
       content: '';
       position: fixed; inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(255,255,255,0.01) 2px,
-        rgba(255,255,255,0.01) 4px
-      );
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px);
       pointer-events: none;
       z-index: 999;
     }
@@ -71,7 +60,7 @@
       gap: 0;
     }
 
-    /* Top left corner line */
+    /* Corners */
     .corner-tl, .corner-tr, .corner-bl, .corner-br {
       position: fixed;
       width: 40px; height: 40px;
@@ -83,7 +72,7 @@
     .corner-bl { bottom: 24px; left: 24px; border-bottom: 1px solid #333; border-left: 1px solid #333; animation-delay: 2.4s; }
     .corner-br { bottom: 24px; right: 24px; border-bottom: 1px solid #333; border-right: 1px solid #333; animation-delay: 2.6s; }
 
-    /* BVM logo */
+    /* Logo */
     .logo {
       font-family: 'Black Ops One', sans-serif;
       font-size: clamp(80px, 20vw, 180px);
@@ -95,7 +84,6 @@
       line-height: 1;
       position: relative;
     }
-
     .logo::after {
       content: 'BVM';
       position: absolute;
@@ -105,15 +93,14 @@
       transform: translate(3px, 3px);
       z-index: -1;
     }
-
     @keyframes revealLogo {
       0% { opacity: 0; transform: scaleX(0.8) translateY(20px); filter: blur(20px); }
       100% { opacity: 1; transform: scaleX(1) translateY(0); filter: blur(0); }
     }
 
-    /* Belgisch schrift line */
+    .belgisch, .tagline, .bottom, .year { font-family: 'Space Mono', monospace; }
+
     .belgisch {
-      font-family: 'Space Mono', monospace;
       font-size: clamp(10px, 2vw, 14px);
       letter-spacing: 0.4em;
       color: #333;
@@ -125,7 +112,6 @@
       margin-bottom: 60px;
     }
 
-    /* Tagline */
     .tagline {
       font-size: clamp(9px, 1.5vw, 11px);
       letter-spacing: 0.5em;
@@ -137,7 +123,7 @@
       margin-bottom: 64px;
     }
 
-    /* Device buttons */
+    /* Buttons */
     .buttons {
       display: flex;
       gap: 24px;
@@ -145,7 +131,6 @@
       animation: fadeIn 1s ease forwards;
       animation-delay: 2s;
     }
-
     .btn {
       position: relative;
       display: flex;
@@ -164,8 +149,8 @@
       background: transparent;
       cursor: none;
       overflow: hidden;
+      min-width: 140px;
     }
-
     .btn::before {
       content: '';
       position: absolute;
@@ -175,22 +160,18 @@
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       z-index: 0;
     }
-
     .btn:hover::before { transform: translateY(0); }
     .btn:hover { color: black; border-color: white; }
     .btn:hover svg { stroke: black; }
-
     .btn svg, .btn span { position: relative; z-index: 1; }
-
     .btn svg {
-      width: 32px; height: 32px;
+      width: 36px; height: 36px;
       stroke: #555;
       fill: none;
       stroke-width: 1.5;
       transition: stroke 0.4s ease;
     }
 
-    /* Divider */
     .divider {
       width: 1px;
       height: 80px;
@@ -198,7 +179,6 @@
       align-self: center;
     }
 
-    /* Bottom text */
     .bottom {
       position: fixed;
       bottom: 32px;
@@ -211,10 +191,8 @@
       opacity: 0;
       animation: fadeIn 1s ease forwards;
       animation-delay: 3s;
-      white-space: nowrap;
     }
 
-    /* Year indicator */
     .year {
       position: fixed;
       top: 32px;
@@ -227,39 +205,11 @@
       animation-delay: 3s;
     }
 
-    /* Belgium flag accent — subtle */
-    .flag-accent {
-      position: fixed;
-      left: 0; top: 0; bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, #1a1a1a 33%, #1a1a1a 33%, #1a1a1a 66%, #1a1a1a 66%);
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 2.8s;
-    }
-
-    /* Loading bar */
-    .loadbar {
-      position: fixed;
-      top: 0; left: 0;
-      height: 1px;
-      background: white;
-      width: 0%;
-      animation: load 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    @keyframes load {
-      0% { width: 0%; opacity: 1; }
-      80% { width: 100%; opacity: 1; }
-      100% { width: 100%; opacity: 0; }
-    }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Mobile responsive */
     @media (max-width: 480px) {
       .buttons { flex-direction: column; gap: 16px; align-items: center; }
       .divider { width: 60px; height: 1px; }
@@ -268,65 +218,64 @@
   </style>
 </head>
 <body>
-
   <div class="cursor" id="cursor"></div>
   <div class="loadbar"></div>
-
   <div class="corner-tl"></div>
   <div class="corner-tr"></div>
   <div class="corner-bl"></div>
   <div class="corner-br"></div>
-  <div class="flag-accent"></div>
-
   <div class="year">EST. 2029</div>
-
   <div class="container">
-
     <div class="logo">BVM</div>
-
     <div class="belgisch">&#9135;&#9135; &#9135;&#8212;&#9135; &#9135; &#8739; &#8739;&#8212;&#9135;&#9135;&#9135;</div>
-
     <div class="tagline">Belgium &nbsp;·&nbsp; 2029 &nbsp;·&nbsp; The future of tomorrow</div>
-
+    
     <div class="buttons">
-
+      <!-- Desktop -->
       <a href="https://brebendc.github.io/BVM/BVM.html" class="btn" id="pc-btn">
-        <svg viewBox="0 0 24 24">
-          <rect x="2" y="3" width="20" height="14" rx="1"/>
-          <line x1="8" y1="21" x2="16" y2="21"/>
-          <line x1="12" y1="17" x2="12" y2="21"/>
-        </svg>
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="1"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         <span>Desktop</span>
+      </a>
+      
+      <div class="divider"></div>
+
+      <!-- Mobile -->
+      <a href="https://brebendc.github.io/BVM-GSM/BVM.html" class="btn" id="phone-btn">
+        <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><circle cx="12" cy="18" r="1" fill="currentColor"/></svg>
+        <span>Mobile</span>
       </a>
 
       <div class="divider"></div>
 
-      <a href="https://brebendc.github.io/BVM-GSM/BVM.html" class="btn" id="phone-btn">
-        <svg viewBox="0 0 24 24">
-          <rect x="7" y="2" width="10" height="20" rx="2"/>
-          <circle cx="12" cy="18" r="1" fill="currentColor"/>
+      <!-- TradingLog - Nieuw! -->
+      <a href="https://brebendc.github.io/BVM/BVM-Trading.html" class="btn" id="trade-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M4 20 L8 12 L12 16 L16 8 L20 14" />
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <!-- Candles -->
+          <rect x="6" y="10" width="3" height="8" rx="0.5" fill="#22c55e"/>
+          <rect x="11" y="6" width="3" height="12" rx="0.5" fill="#ef4444"/>
+          <rect x="16" y="13" width="3" height="5" rx="0.5" fill="#22c55e"/>
         </svg>
-        <span>Mobile</span>
+        <span>TradingLog</span>
       </a>
-
     </div>
   </div>
-
   <div class="bottom">Belgische Voertuig Motoriek &nbsp;·&nbsp; © Breben DC 2026</div>
 
   <script>
-    // Custom cursor
     const cursor = document.getElementById('cursor');
     document.addEventListener('mousemove', e => {
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
     });
+
     document.querySelectorAll('.btn').forEach(btn => {
       btn.addEventListener('mouseenter', () => cursor.classList.add('grow'));
       btn.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
     });
 
-    // Auto-detect device and highlight correct button
+    // Auto highlight mobile on phone
     const isMobile = /iPhone|Android|iPad|Mobile/i.test(navigator.userAgent);
     if (isMobile) {
       document.getElementById('phone-btn').style.borderColor = '#444';
